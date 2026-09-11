@@ -28,6 +28,13 @@ const Login = () => {
       if (!valor) error = 'Seleccione un sector'
     }
     setErrores((prev)=>({...prev,[nombre]:error}))
+    return error
+  }
+  const validar = () => {
+    const errorEmail = validarCampo('email', email)
+    const errorPassword = validarCampo('password', password)
+    const errorSector = validarCampo('sector', sector)
+    return !errorEmail && !errorPassword && !errorSector
   }
   const manejarSubmit = (e) => {
     e.preventDefault()
