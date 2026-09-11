@@ -11,30 +11,23 @@ const Login = () => {
   const [errores, setErrores] = useState({})
   const { setAdmin } = useAutorizaciones()
   const navigate = useNavigate()
-  const validar = () => {
-    const nuevosErrores = {}
+  const validarCampo = (nombre, valor) => {
+    let error = ''
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!email) {
-      nuevosErrores.email = 'El email es obligatorio'
-    } else if (!emailRegex.test(email)) {
-      nuevosErrores.email = 'Email inválido'
+    if (nombre === 'email') {
+      if (!valor) error = 'El email es obligatorio'
+      else if (!emailRegex.test(valor)) error = 'Email inválido'
     }
-    if (!password) {
-      nuevosErrores.password = 'La contraseña es obligatoria'
-    } else {
-      if (password.length < 8) {
-        nuevosErrores.password = 'Mínimo 8 caracteres'
-      } else if (!/[A-Z]/.test(password)) {
-        nuevosErrores.password = 'Debe tener una mayúscula'
-      } else if (!/[0-9]/.test(password)) {
-        nuevosErrores.password = 'Debe tener un número'
-      }
+    if (nombre == 'password') {
+      if (!valor) error = 'La contraseña es obligatoria'
+      else if (valor.length < 8) error = 'Mínimo 8 caracteres'
+      else if (!/[A-Z]/.test(valor)) error = 'Debe tener una mayúscula'
+      else if (!/[0-9]/.test(valor)) error = 'Debe tener un número'
     }
-    if (!sector) {
-      nuevosErrores.sector = 'Seleccione un sector'
+    if (nombre == 'sector') {
+      if (!valor) error = 'Seleccione un sector'
     }
-    setErrores(nuevosErrores)
-    return Object.keys(nuevosErrores).length === 0
+    setErrores((prev)=>({...prev,[nombre]:error}))
   }
   const manejarSubmit = (e) => {
     e.preventDefault()
@@ -61,17 +54,20 @@ const Login = () => {
       <h1>Iniciar Sesión</h1>
       <form onSubmit={manejarSubmit}>
         <label>Email:</label>
-        <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="email" value={email} onChange={(e) => {
+          const valor = e.target.value; setEmail(valor); validarCampo('email',valor) }} />
         <p style={{ color: 'red', minHeight: '18px' }}>
           {errores.email || ' '}
         </p>
         <label>Contraseña:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input type="password" value={password} onChange={(e) => {
+          const valor = e.target.value; setPassword(valor); validarCampo('password',valor) }}/>
         <p style={{ color: 'red', minHeight: '18px' }}>
           {errores.password || ' '}
         </p>
         <label>Sector:</label>
-        <select value={sector} onChange={(e) => setSector(e.target.value)}>
+        <select value={sector} onChange={(e) => { 
+          const valor = e.target.value; setSector(valor); validarCampo('sector',valor)}}>
           <option value="">Seleccione un sector</option>
           <option value="Soporte">Soporte</option>
           <option value="Gerencia">Gerencia</option>
