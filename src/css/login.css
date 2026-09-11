@@ -70,3 +70,11 @@ form button{
 form button:hover{
     background:#c2185b;
 }
+
+.login-container button:disabled {
+  background-color: #cccccc !important; 
+  color: #666666 !important;            
+  border-color: #cccccc !important;
+  cursor: not-allowed !important;       
+  opacity: 0.6;                         
+}
