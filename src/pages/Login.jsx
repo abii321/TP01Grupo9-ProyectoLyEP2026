@@ -27,7 +27,7 @@ const Login = () => {
     if (nombre == 'sector') {
       if (!valor) error = 'Seleccione un sector'
     }
-    setErrores((prev)=>({...prev,[nombre]:error}))
+    setErrores((prev)=>({...prev,[nombre]:error, general:''}))
     return error
   }
   const validar = () => {
