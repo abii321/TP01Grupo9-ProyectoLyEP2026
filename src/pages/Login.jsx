@@ -36,6 +36,7 @@ const Login = () => {
     const errorSector = validarCampo('sector', sector)
     return !errorEmail && !errorPassword && !errorSector
   }
+  const esFormIncompleto = email.trim() === '' || password.trim() === '' || sector.trim() === '' || Boolean(errores.email) || Boolean(errores.password) || Boolean(errores.sector)
   const manejarSubmit = (e) => {
     e.preventDefault()
     if (!validar()) return
@@ -59,7 +60,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <h1>Iniciar Sesión</h1>
-      <form onSubmit={manejarSubmit}>
+      <form onSubmit={manejarSubmit} >
         <label>Email:</label>
         <input type="email" value={email} onChange={(e) => {
           const valor = e.target.value; setEmail(valor); validarCampo('email',valor) }} />
@@ -83,7 +84,7 @@ const Login = () => {
           {errores.sector || ' '}
         </p>
         <p style={{ color: 'red', minHeight: '18px' }}> {errores.general || ' '}</p>
-        <button type="submit">Ingresar</button>
+        <button type="submit" disabled={esFormIncompleto}>Ingresar</button>
       </form>
     </div>
   )
