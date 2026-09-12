@@ -20,9 +20,9 @@ const FormCliente = () => {
         if (nombre.trim() === "") nuevosErrores.nombre = "El nombre es obligatorio.";
         if (email.trim() === "") nuevosErrores.email = "El email es obligatorio.";
         if (ciudad.trim() === "") nuevosErrores.ciudad = "La ciudad es obligatoria.";
-        
+
         // (Tu regex del H-04 sigue adentro del manejarSubmit, lo dejamos ahí)
-        
+
         setErrores(nuevosErrores);
         return Object.keys(nuevosErrores).length === 0; // Devuelve true si no hay errores
     };
@@ -106,31 +106,29 @@ const FormCliente = () => {
             <Form onSubmit={manejarSubmit}>
 
                 <Form.Group className="mb-3">
-
                     <Form.Label>Nombre</Form.Label>
-
                     <Form.Control
                         type="text"
                         value={nombre}
-                        onChange={(e) =>
-                            setNombre(e.target.value)
-                        }
+                        onChange={(e) => setNombre(e.target.value)}
+                        isInvalid={!!errores.nombre}
                     />
-
+                    <Form.Control.Feedback type="invalid">
+                        {errores.nombre}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-
                     <Form.Label>Email</Form.Label>
-
                     <Form.Control
                         type="email"
                         value={email}
-                        onChange={(e) =>
-                            setEmail(e.target.value)
-                        }
+                        onChange={(e) => setEmail(e.target.value)}
+                        isInvalid={!!errores.email}
                     />
-
+                    <Form.Control.Feedback type="invalid">
+                        {errores.email}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
