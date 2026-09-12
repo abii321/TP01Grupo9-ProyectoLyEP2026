@@ -36,7 +36,9 @@ const FormCliente = () => {
         const telefonoRegex = /^\+?[0-9\s\-]{8,15}$/;
 
         if (!telefonoRegex.test(telefono.trim())) {
-            setError("Formato inválido.");
+            
+            setError("El número de teléfono es inválido. Use solo números (8 a 15 dígitos), guiones o un '+' inicial.");
+
             return;
         }
 
