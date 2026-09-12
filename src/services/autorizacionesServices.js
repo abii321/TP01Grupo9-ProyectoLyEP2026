@@ -44,6 +44,13 @@ const login = (email, password, sector) => {
       usuario.sector === sector
   )
 }
+
+const obtenerEstadisticas = () => {
+  const soporte = usuarios.filter(usuario => usuario.sector === 'Soporte').length;
+  const gerencia = usuarios.filter(usuario => usuario.sector === 'Gerencia').length;
+  return { soporte, gerencia };
+}
+
 export default {
-  login
+  login, obtenerEstadisticas
 }

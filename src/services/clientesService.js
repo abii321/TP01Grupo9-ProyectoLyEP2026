@@ -8,10 +8,15 @@ const crearCliente = async (cliente) => {
         URL,
         cliente
     );
+    return respuesta.data;
+};
 
+const obtenerClientes = async () => {
+    const respuesta = await axios.get(URL);
     return respuesta.data;
 };
 
 export default {
-    crearCliente
+    crearCliente,
+    obtenerClientes
 };
