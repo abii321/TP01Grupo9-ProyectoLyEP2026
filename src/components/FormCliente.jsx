@@ -126,7 +126,7 @@ const FormCliente = () => {
                     <Form.Label>Teléfono</Form.Label>
 
                     <Form.Control
-                        type="text"
+                        type="tel"
                         value={telefono}
                         onChange={(e) =>
                             setTelefono(e.target.value)
