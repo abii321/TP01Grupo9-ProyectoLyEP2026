@@ -128,9 +128,9 @@ const FormCliente = () => {
                     <Form.Control
                         type="tel"
                         value={telefono}
-                        onChange={(e) =>
-                            setTelefono(e.target.value)
-                        }
+                        onChange={(e) => setTelefono(e.target.value)}
+                        pattern="^\+?[0-9\s\-]{8,15}$"
+                        title="Debe contener entre 8 y 15 números. Puede incluir espacios, guiones o un '+' al inicio."
                     />
 
                 </Form.Group>
