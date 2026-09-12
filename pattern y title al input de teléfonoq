@@ -1,0 +1,69 @@
+[33mcommit aff2266feb8aee60fe557c0c46540bd3f36ce21e[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mLujanCansino-FormNuevoCliente[m[33m)[m
+Author: lujancansino <celestelujancansino@gmail.com>
+Date:   Fri Sep 11 22:22:43 2026 -0300
+
+    feat: agregar atributos pattern y title al input de teléfono [CansinoLujan]
+
+[33mcommit 2d1fc9808237962e95347f8528a779b9ad0df148[m
+Author: lujancansino <celestelujancansino@gmail.com>
+Date:   Fri Sep 11 22:19:30 2026 -0300
+
+    feat: cambiar input de teléfono a type='tel' para mejorar accesibilidad [LujanCansino]
+
+[33mcommit 8133176ecc9e934e4d6056c63c10b015a1e159ca[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/LujanCansino-FormNuevoCliente[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 3d3c53f a4df3f8
+Author: abii321 <abigail.teran321@gmail.com>
+Date:   Fri Sep 11 12:59:11 2026 -0300
+
+    Merge pull request #2 from abii321/AbigailTeran-FormInicioSesion
+    
+    Fix #1: Formulario de Inicio de Sesion
+
+[33mcommit a4df3f8ab2e010e26aaddf88b8e4bcf3c5482a6a[m[33m ([m[1;31morigin/AbigailTeran-FormInicioSesion[m[33m)[m
+Author: abii321 <abigail.teran321@gmail.com>
+Date:   Fri Sep 11 11:54:26 2026 -0300
+
+    fix: corregir reactividad asincrona en validaciones [AbigailTeran]
+
+[33mcommit dda7277537bcb96d98ccfa9f80b3c20aded911a0[m
+Author: abii321 <abigail.teran321@gmail.com>
+Date:   Fri Sep 11 11:51:35 2026 -0300
+
+    feat: deshabilitado del boton Ingresar y diseño css correspondiente [AbigailTeran]
+
+[33mcommit 0763b98b4e61389842ea123d4eded2ceb463ecd9[m
+Author: abii321 <abigail.teran321@gmail.com>
+Date:   Fri Sep 11 11:36:59 2026 -0300
+
+    fix: corregir validacion antes del envio [AbigailTeran]
+
+[33mcommit c20f6f493c9fdae4c54d16b8cca96eb8196fb861[m
+Author: abii321 <abigail.teran321@gmail.com>
+Date:   Fri Sep 11 11:20:03 2026 -0300
+
+    feat: agregar validacion de campos en tiempo real
+
+[33mcommit afe185db8956d10948907b1753a69c75c3732947[m
+Author: abii321 <abigail.teran321@gmail.com>
+Date:   Fri Sep 11 10:47:06 2026 -0300
+
+    fix: reemplazar alert por mensaje de error inline [AbigailTeran]
+
+[33mcommit 3d3c53f1e19066e6bfd58e489de752cb6a311827[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 05aaf50 5a5965f
+Author: gustso <gustso@gmail.com>
+Date:   Wed Sep 2 09:39:36 2026 -0300
+
+    Gustavo Sosa agregada licencia MIT
+
+[33mcommit 05aaf509ca1514bdfeceb9ba348a3fc6c32f176f[m
+Author: gustso <gustso@gmail.com>
+Date:   Wed Sep 2 09:30:49 2026 -0300
+
+    Gustavo Sosa Inicialización del Proyecto para trabajo simulado
+
+[33mcommit 5a5965fb686aec6708b8b9b4a63ee075babd037f[m
+Author: gustso <gustso@fi.unju.edu.ar>
+Date:   Wed Sep 2 08:42:57 2026 -0300
+
+    Initial commit

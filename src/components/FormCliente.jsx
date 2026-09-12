@@ -13,6 +13,19 @@ const FormCliente = () => {
     const [mensaje, setMensaje] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const [errores, setErrores] = useState({});
+
+    const validarCampos = () => {
+        const nuevosErrores = {};
+        if (nombre.trim() === "") nuevosErrores.nombre = "El nombre es obligatorio.";
+        if (email.trim() === "") nuevosErrores.email = "El email es obligatorio.";
+        if (ciudad.trim() === "") nuevosErrores.ciudad = "La ciudad es obligatoria.";
+
+        // (Tu regex del H-04 sigue adentro del manejarSubmit, lo dejamos ahí)
+
+        setErrores(nuevosErrores);
+        return Object.keys(nuevosErrores).length === 0; // Devuelve true si no hay errores
+    };
 
     const manejarSubmit = async (e) => {
 
@@ -21,24 +34,14 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
-        if (
-            nombre.trim() === "" ||
-            email.trim() === "" ||
-            telefono.trim() === "" ||
-            ciudad.trim() === ""
-        ) {
-
-            setError("Complete todos los campos.");
-
+        if (!validarCampos()) {
             return;
         }
 
         const telefonoRegex = /^\+?[0-9\s\-]{8,15}$/;
 
         if (!telefonoRegex.test(telefono.trim())) {
-            
-            setError("El número de teléfono es inválido. Use solo números (8 a 15 dígitos), guiones o un '+' inicial.");
-
+            setErrores(prev => ({ ...prev, telefono: "El número de teléfono es inválido. Use solo números (8 a 15 dígitos), guiones o un '+' inicial." }));
             return;
         }
 
@@ -103,31 +106,29 @@ const FormCliente = () => {
             <Form onSubmit={manejarSubmit}>
 
                 <Form.Group className="mb-3">
-
                     <Form.Label>Nombre</Form.Label>
-
                     <Form.Control
                         type="text"
                         value={nombre}
-                        onChange={(e) =>
-                            setNombre(e.target.value)
-                        }
+                        onChange={(e) => setNombre(e.target.value)}
+                        isInvalid={!!errores.nombre}
                     />
-
+                    <Form.Control.Feedback type="invalid">
+                        {errores.nombre}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-
                     <Form.Label>Email</Form.Label>
-
                     <Form.Control
                         type="email"
                         value={email}
-                        onChange={(e) =>
-                            setEmail(e.target.value)
-                        }
+                        onChange={(e) => setEmail(e.target.value)}
+                        isInvalid={!!errores.email}
                     />
-
+                    <Form.Control.Feedback type="invalid">
+                        {errores.email}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -145,17 +146,16 @@ const FormCliente = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-
                     <Form.Label>Ciudad</Form.Label>
-
                     <Form.Control
                         type="text"
                         value={ciudad}
-                        onChange={(e) =>
-                            setCiudad(e.target.value)
-                        }
+                        onChange={(e) => setCiudad(e.target.value)}
+                        isInvalid={!!errores.ciudad}
                     />
-
+                    <Form.Control.Feedback type="invalid">
+                        {errores.ciudad}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Button
