@@ -48,11 +48,18 @@ const ListaClientes = () => {
     return <h2>Error al cargar los clientes.</h2>;
   }
 
+  const agregarClienteVisual = (nuevoCliente) => {
+    const listaActualizada = [nuevoCliente, ...clientes];
+    setClientes(listaActualizada);
+    localStorage.setItem("clientesLocal", JSON.stringify(listaActualizada));
+  };
+
+
   return (
     <div className="clientes-container">
 
       <h1>Clientes</h1>
-      <FormCliente />
+      <FormCliente onCrear={agregarClienteVisual} />
 
       <hr />
 
