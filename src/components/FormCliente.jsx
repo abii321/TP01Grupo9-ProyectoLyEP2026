@@ -33,6 +33,15 @@ const FormCliente = () => {
             return;
         }
 
+        const telefonoRegex = /^\+?[0-9\s\-]{8,15}$/;
+
+        if (!telefonoRegex.test(telefono.trim())) {
+            
+            setError("El número de teléfono es inválido. Use solo números (8 a 15 dígitos), guiones o un '+' inicial.");
+
+            return;
+        }
+
         const nuevoCliente = {
 
             email,
@@ -126,11 +135,11 @@ const FormCliente = () => {
                     <Form.Label>Teléfono</Form.Label>
 
                     <Form.Control
-                        type="text"
+                        type="tel"
                         value={telefono}
-                        onChange={(e) =>
-                            setTelefono(e.target.value)
-                        }
+                        onChange={(e) => setTelefono(e.target.value)}
+                        pattern="^\+?[0-9\s\-]{8,15}$"
+                        title="Debe contener entre 8 y 15 números. Puede incluir espacios, guiones o un '+' al inicio."
                     />
 
                 </Form.Group>
