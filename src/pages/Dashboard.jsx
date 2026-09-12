@@ -1,6 +1,9 @@
-import '../css/dashboard.css'
-import useAutorizaciones from '../hooks/useAutorizaciones'
-import Login from './Login'
+import '../css/dashboard.css';
+import { useState, useEffect } from 'react'; // Agregados los hooks
+import useAutorizaciones from '../hooks/useAutorizaciones';
+import Login from './Login';
+import clientesService from '../services/clientesService'; // Importamos el servicio de clientes
+import autorizacionesService from '../services/autorizacionesService';
 
 const Dashboard = () => {
   const { admin } = useAutorizaciones()
