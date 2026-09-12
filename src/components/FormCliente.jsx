@@ -146,17 +146,16 @@ const FormCliente = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-
                     <Form.Label>Ciudad</Form.Label>
-
                     <Form.Control
                         type="text"
                         value={ciudad}
-                        onChange={(e) =>
-                            setCiudad(e.target.value)
-                        }
+                        onChange={(e) => setCiudad(e.target.value)}
+                        isInvalid={!!errores.ciudad}
                     />
-
+                    <Form.Control.Feedback type="invalid">
+                        {errores.ciudad}
+                    </Form.Control.Feedback>
                 </Form.Group>
 
                 <Button
