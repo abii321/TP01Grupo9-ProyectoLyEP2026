@@ -40,7 +40,7 @@ const DetalleCliente = () => {
     }
   };
   if (!cliente) {
-    return <h2>Cargando cliente...</h2>;
+    return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Cargando ficha del cliente...</h2>;
   }
 
   return (
