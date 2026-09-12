@@ -13,9 +13,20 @@ const FormCliente = () => {
     const [mensaje, setMensaje] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-        const [errores, setErrores] = useState({});
+    const [errores, setErrores] = useState({});
 
-
+    const validarCampos = () => {
+        const nuevosErrores = {};
+        if (nombre.trim() === "") nuevosErrores.nombre = "El nombre es obligatorio.";
+        if (email.trim() === "") nuevosErrores.email = "El email es obligatorio.";
+        if (ciudad.trim() === "") nuevosErrores.ciudad = "La ciudad es obligatoria.";
+        
+        // (Tu regex del H-04 sigue adentro del manejarSubmit, lo dejamos ahí)
+        
+        setErrores(nuevosErrores);
+        return Object.keys(nuevosErrores).length === 0; // Devuelve true si no hay errores
+    };
+    
     const manejarSubmit = async (e) => {
 
         e.preventDefault();
@@ -38,9 +49,7 @@ const FormCliente = () => {
         const telefonoRegex = /^\+?[0-9\s\-]{8,15}$/;
 
         if (!telefonoRegex.test(telefono.trim())) {
-            
-            setError("El número de teléfono es inválido. Use solo números (8 a 15 dígitos), guiones o un '+' inicial.");
-
+            setErrores(prev => ({ ...prev, telefono: "El número de teléfono es inválido. Use solo números (8 a 15 dígitos), guiones o un '+' inicial." }));
             return;
         }
 
