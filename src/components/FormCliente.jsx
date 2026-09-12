@@ -35,6 +35,11 @@ const FormCliente = () => {
 
         const telefonoRegex = /^\+?[0-9\s\-]{8,15}$/;
 
+        if (!telefonoRegex.test(telefono.trim())) {
+            setError("Formato inválido.");
+            return;
+        }
+
         const nuevoCliente = {
 
             email,
