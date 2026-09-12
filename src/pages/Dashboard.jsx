@@ -20,7 +20,7 @@ const Dashboard = () => {
       const cargarDatos = async () => {
         try {
           const clientesData = await clientesService.obtenerClientes()
-          const personalData = autorizacionesService.obtenerEstadisticas()
+          const personalData = await autorizacionesService.obtenerEstadisticas()
 
           setMetricas({
             clientes: clientesData.length,
@@ -55,15 +55,15 @@ const Dashboard = () => {
           <div className="dashboard-cards">
             <div className="dashboard-card">
               <h3>Clientes</h3>
-              <p>10</p>
+              <p>{metricas.clientes}</p>
             </div>
             <div className="dashboard-card">
               <h3>Gerencia</h3>
-              <p>3</p>
+              <p>{metricas.gerencia}</p>
             </div>
             <div className="dashboard-card">
               <h3>Soporte</h3>
-              <p>3</p>
+              <p>{metricas.soporte}</p>
             </div>
           </div>
         </>
