@@ -73,6 +73,9 @@ const FormCliente = () => {
                 await clientesService.crearCliente(
                     nuevoCliente
                 );
+            const clienteParaPantalla = { ...nuevoCliente, id: Date.now() };
+            if (onCrear) onCrear(clienteParaPantalla);
+            setMensaje(`Cliente creado correctamente.`);
 
             setMensaje(
                 `Cliente creado correctamente. ID: ${respuesta.id}`
