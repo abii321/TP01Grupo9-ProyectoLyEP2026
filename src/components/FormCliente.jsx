@@ -33,6 +33,8 @@ const FormCliente = () => {
             return;
         }
 
+        const telefonoRegex = /^\+?[0-9\s\-]{8,15}$/;
+
         const nuevoCliente = {
 
             email,
