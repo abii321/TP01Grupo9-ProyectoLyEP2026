@@ -13,6 +13,8 @@ const FormCliente = () => {
     const [mensaje, setMensaje] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+        const [errores, setErrores] = useState({});
+
 
     const manejarSubmit = async (e) => {
 
