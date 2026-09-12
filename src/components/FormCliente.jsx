@@ -26,7 +26,7 @@ const FormCliente = () => {
         setErrores(nuevosErrores);
         return Object.keys(nuevosErrores).length === 0; // Devuelve true si no hay errores
     };
-    
+
     const manejarSubmit = async (e) => {
 
         e.preventDefault();
@@ -34,15 +34,7 @@ const FormCliente = () => {
         setMensaje("");
         setError("");
 
-        if (
-            nombre.trim() === "" ||
-            email.trim() === "" ||
-            telefono.trim() === "" ||
-            ciudad.trim() === ""
-        ) {
-
-            setError("Complete todos los campos.");
-
+        if (!validarCampos()) {
             return;
         }
 
