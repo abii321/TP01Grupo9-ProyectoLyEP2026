@@ -10,21 +10,24 @@ const ListaClientes = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/users")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Error al obtener clientes");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setClientes(data);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError(true);
-        setLoading(false);
-      });
+    const clientesGuardados = localStorage.getItem("clientesLocal");
+
+    if (clientesGuardados) {
+      setClientes(JSON.parse(clientesGuardados));
+      setLoading(false);
+    } else {
+      fetch("https://fakestoreapi.com/users")
+        .then((res) => res.json())
+        .then((data) => {
+          setClientes(data);
+          localStorage.setItem("clientesLocal", JSON.stringify(data));
+          setLoading(false);
+        })
+        .catch(() => {
+          setError(true);
+          setLoading(false);
+        });
+    }
   }, []);
 
   const clientesFiltrados = clientes.filter(
@@ -45,11 +48,18 @@ const ListaClientes = () => {
     return <h2>Error al cargar los clientes.</h2>;
   }
 
+  const agregarClienteVisual = (nuevoCliente) => {
+    const listaActualizada = [nuevoCliente, ...clientes];
+    setClientes(listaActualizada);
+    localStorage.setItem("clientesLocal", JSON.stringify(listaActualizada));
+  };
+
+
   return (
     <div className="clientes-container">
 
       <h1>Clientes</h1>
-      <FormCliente />
+      <FormCliente onCrear={agregarClienteVisual} />
 
       <hr />
 

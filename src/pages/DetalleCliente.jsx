@@ -1,9 +1,9 @@
 import '../css/detallecliente.css'
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
- 
+
 const DetalleCliente = () => {
- const { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
 
@@ -31,13 +31,16 @@ const DetalleCliente = () => {
         setTimeout(() => {
           navigate("/clientes");
         }, 2000);
+        const clientesGuardados = JSON.parse(localStorage.getItem("clientesLocal")) || [];
+        const filtrados = clientesGuardados.filter(c => c.id !== Number(id));
+        localStorage.setItem("clientesLocal", JSON.stringify(filtrados));
       }
     } catch (error) {
       setMensaje("Error al eliminar cliente");
     }
   };
   if (!cliente) {
-    return <h2>Cargando cliente...</h2>;
+    return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Cargando ficha del cliente...</h2>;
   }
 
   return (
@@ -45,7 +48,7 @@ const DetalleCliente = () => {
       <h1>Ficha del Cliente</h1>
       <p>Rol actual: {role}</p>
 
-      {mensaje && <p className = 'mensaje-eliminado'>{mensaje}</p>}
+      {mensaje && <p className='mensaje-eliminado'>{mensaje}</p>}
 
       <p>
         <strong>ID:</strong> {cliente.id}
@@ -93,7 +96,7 @@ const DetalleCliente = () => {
       </p>
 
       {role?.trim() === "Gerencia" && (
-        <button className='btn-eliminar'onClick={eliminarCliente}>
+        <button className='btn-eliminar' onClick={eliminarCliente}>
           Eliminar Cliente
         </button>
       )}
