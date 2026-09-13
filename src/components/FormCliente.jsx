@@ -4,7 +4,7 @@ import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import clientesService from "../services/clientesService";
 
 const FormCliente = ({ onCrear }) => {
-    
+
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
@@ -73,13 +73,13 @@ const FormCliente = ({ onCrear }) => {
                 await clientesService.crearCliente(
                     nuevoCliente
                 );
-            const clienteParaPantalla = { ...nuevoCliente, id: Date.now() };
-            if (onCrear) onCrear(clienteParaPantalla);
-            setMensaje(`Cliente creado correctamente.`);
+            const idGenerado = Date.now();
+            const clienteParaPantalla = { ...nuevoCliente, id: idGenerado };
 
-            setMensaje(
-                `Cliente creado correctamente. ID: ${respuesta.id}`
-            );
+            if (onCrear) onCrear(clienteParaPantalla);
+
+
+            setMensaje(`Cliente creado correctamente. ID: ${idGenerado}`);
 
             setNombre("");
             setEmail("");
