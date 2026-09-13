@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import useAutorizaciones from '../hooks/useAutorizaciones'
 import Login from './Login'
 import clientesService from '../services/clientesService'
-import autorizacionesService from '../services/autorizacionesServices'
+import autorizacionesService from '../services/autorizacionesService'
 
 const Dashboard = () => {
   const { admin } = useAutorizaciones()
