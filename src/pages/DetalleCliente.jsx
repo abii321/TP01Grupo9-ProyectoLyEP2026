@@ -10,10 +10,17 @@ const DetalleCliente = () => {
   const [cliente, setCliente] = useState(null);
   const [mensaje, setMensaje] = useState("");
 
-  useEffect(() => {
-    fetch(`https://fakestoreapi.com/users/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCliente(data));
+    useEffect(() => {
+    const clientesGuardados = JSON.parse(localStorage.getItem("clientesLocal")) || [];
+    const clienteLocal = clientesGuardados.find(c => c.id === Number(id));
+
+    if (clienteLocal) {
+      setCliente(clienteLocal);
+    } else {
+      fetch(`https://fakestoreapi.com/users/${id}`)
+        .then((res) => res.json())
+        .then((data) => setCliente(data));
+    }
   }, [id]);
 
   const eliminarCliente = async () => {
