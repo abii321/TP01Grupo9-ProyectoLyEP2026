@@ -1,39 +1,55 @@
 // src/pages/Dashboard.jsx
-import '../css/dashboard.css'
-import { useState, useEffect } from 'react'
-import useAutorizaciones from '../hooks/useAutorizaciones'
-import Login from './Login'
-import clientesService from '../services/clientesService'
-import autorizacionesService from '../services/autorizacionesServices'
+import '../css/dashboard.css';
+import { useState, useEffect } from 'react';
+import useAutorizaciones from '../hooks/useAutorizaciones';
+import Login from './Login';
+import clientesService from '../services/clientesService';
+import autorizacionesService from '../services/autorizacionesServices';
 
 const Dashboard = () => {
-  const { admin } = useAutorizaciones()
+  const { admin } = useAutorizaciones();
 
   const [metricas, setMetricas] = useState({
     clientes: 0,
     gerencia: 0,
     soporte: 0
-  })
+  });
 
   useEffect(() => {
     if (admin) {
       const cargarDatos = async () => {
         try {
-          const clientesData = await clientesService.obtenerClientes()
-          const personalData = await autorizacionesService.obtenerEstadisticas()
+          let totalClientes = 0;
+          const clientesGuardados = localStorage.getItem("clientesLocal");
 
+          if (clientesGuardados) {
+            // 1. Si existen clientes guardados localmente, tomamos la longitud de dicho arreglo
+            const listaLocal = JSON.parse(clientesGuardados);
+            totalClientes = listaLocal.length;
+          } else {
+            // 2. Si no hay cache local, los obtenemos de la API e inicializamos el localStorage
+            const clientesData = await clientesService.obtenerClientes();
+            totalClientes = clientesData.length;
+            localStorage.setItem("clientesLocal", JSON.stringify(clientesData));
+          }
+
+          // 3. Obtenemos los contadores estáticos/filtrados del personal por sector
+          const personalData = autorizacionesService.obtenerEstadisticas();
+
+          // 4. Actualizamos el estado de las métricas de forma dinámica
           setMetricas({
-            clientes: clientesData.length,
+            clientes: totalClientes,
             gerencia: personalData.gerencia,
             soporte: personalData.soporte
-          })
+          });
         } catch (error) {
-          console.error("Error al cargar las métricas:", error)
+          console.error("Error al cargar las métricas del dashboard:", error);
         }
-      }
-      cargarDatos()
+      };
+
+      cargarDatos();
     }
-  }, [admin])
+  }, [admin]);
 
   return (
     <div className="dashboard">
@@ -69,7 +85,7 @@ const Dashboard = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
